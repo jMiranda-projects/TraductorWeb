@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es"> <head>
+    <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Traductor CSV - Net LogistiK</title> <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="page-container">
+        <header class="header-container">
+            <img src="{{ url_for('static', filename='images/NetLogo.png') }}" alt="Logo Net LogistiK" class="logo"
+                 onerror="this.onerror=null; this.src='https://placehold.co/200x50/cccccc/333333?text=Net+LogistiK&font=arial';" />
+        </header>
+
+        <main class="main-container">
+            <h1>Traductor Inteligente de CSV</h1>
+            <h2>Sube tu archivo CSV en Español para traducirlo a Inglés.</h2> <form id="uploadForm" method="post" enctype="multipart/form-data">
+                <label for="csvFileUpload" class="upload-area"> <span class="upload-button-styled">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cloud-arrow-up-fill" viewBox="0 0 16 16" style="margin-right: 8px; vertical-align: middle;">
+                            <path d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2m2.354 5.146a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0z"/>
+                        </svg>
+                        Seleccionar archivo CSV </span>
+                    <input type="file" name="archivo_csv" id="csvFileUpload" accept=".csv" required>
+                    <p id="uploadAreaText">o arrastra y suelta el archivo aquí</p> </label>
+
+                <div class="form-section">
+                    <label for="columnToTranslate">Columna a traducir (Nombre o Índice):</label> <input type="text" name="columna_a_traducir" id="columnToTranslate" placeholder="Ej: 'Descripción' o '2'" required> <span class="helptext">Indica el nombre exacto del encabezado de la columna en Español o su número de índice (comenzando en 0).</span> </div>
+
+                <div class="form-section">
+                    <label for="csvDelimiter">Delimitador del CSV:</label> <input type="text" name="delimitador_csv" id="csvDelimiter" value="," maxlength="1">
+                    <span class="helptext">Comúnmente es una coma (,) o un punto y coma (;).</span> </div>
+
+                <button type="submit" id="submitButton">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-translate" viewBox="0 0 16 16" style="margin-right: 8px; vertical-align: middle;">
+                         <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286zm1.634-2.352L5.5 1.656h-.049l-.679 2.699zM4 9.5a1 1 0 0 1 .988-1h.024a1 1 0 0 1 .988 1h.024a1 1 0 0 1 .988 1h.024a1 1 0 0 1 .988 1h.024a1 1 0 0 1 .988 1h.024a1 1 0 0 1 .988 1H12V9.5a1 1 0 0 1-.988-1H11a1 1 0 0 1-.988-1H10a1 1 0 0 1-.988-1H9a1 1 0 0 1-.988-1H8a1 1 0 0 1-.988-1H7a1 1 0 0 1-.988-1H6a1 1 0 0 1-.988-1H5a1 1 0 0 1-.988-1H4z"/>
+                        <path d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zm7.138 9.995q.288.289.451.635c.163.346.244.735.244 1.172 0 .472-.093.872-.282 1.19-.189.318-.479.559-.869.723v1.34h-1.162v-1.347c-.455-.148-.832-.396-1.133-.742s-.451-.77-.451-1.272q0-.45.189-.847c.189-.397.497-.709.926-.936.29-.153.599-.266.926-.339V9.5H9l-.091.003-.09.003-.088.003V13h1.043q.311 0 .601-.054c.29-.053.539-.15.734-.289.195-.139.33-.33.406-.573.076-.243.114-.539.114-.886 0-.43-.08-.789-.243-1.075a1.78 1.78 0 0 0-.651-.66C9.695 10.043 9.37 10 9 10V8.5h1.043q.596 0 1.095.178.5.178.869.516.369.338.56.801.19.462.19.996 0 .6-.244 1.065a3.04 3.04 0 0 1-.708.876 2.98 2.98 0 0 1-1.021.581v1.335h1.162v-1.335q.465-.093.847-.327.382-.234.635-.596.253-.361.382-.802.129-.44.129-.965 0-.505-.148-.936c-.148-.43-.396-.77-.742-1.021a3.3 3.3 0 0 0-1.133-.646V8.5h1.162z"/>
+                    </svg>
+                    Traducir y Descargar </button>
+            </form>
+
+            <div id="progressSection" class="progress-section">
+                <p id="statusMessage">Procesando archivo, por favor espera...</p> <div class="progress-bar-container">
+                    <div id="progressBar" class="progress-bar">0%</div>
+                </div>
+            </div>
+
+            <div id="messageAreaContainer">
+                {% if error %} <div class="message-area error"><p>{{ error }}</p></div>
+                {% endif %}
+                {% if aviso %} <div class="message-area aviso"><p>{{ aviso }}</p></div>
+                {% endif %}
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; {{ now.year if now else '2024' }} Net LogistiK - Traductor CSV. Todos los derechos reservados.</p> </footer>
+    </div>
+
+    <script>
+        // --- DOM Element Selection ---
+        // Grab references to key HTML elements used by the script.
+        const uploadForm = document.getElementById('uploadForm');
+        const submitButton = document.getElementById('submitButton');
+        const progressSection = document.getElementById('progressSection');
+        const progressBar = document.getElementById('progressBar');
+        const statusMessage = document.getElementById('statusMessage'); // Displays text status updates
+        const messageAreaContainer = document.getElementById('messageAreaContainer'); // For error/notice messages
+        const csvFileInput = document.getElementById('csvFileUpload'); // The actual file input
+        const uploadArea = document.querySelector('.upload-area'); // The styled <label> for file input
+        const uploadAreaTextEl = document.getElementById('uploadAreaText'); // Text within upload area (filename or default)
+        const originalUploadAreaText = uploadAreaTextEl ? uploadAreaTextEl.textContent : "o arrastra y suelta el archivo aquí"; // Default text
+
+        let pollingIntervalId; // Variable to store the ID of the setInterval for status polling.
+
+        /**
+         * Resets the UI to its initial state before submission or after completion/error.
+         * Hides progress bar, shows the form, and resets button/message states.
+         */
+        function resetUI() {
+            uploadForm.classList.remove('form-hidden'); // Show the form
+            progressSection.style.display = 'none'; // Hide the progress section
+            progressBar.style.width = '0%'; // Reset progress bar width
+            progressBar.textContent = '0%'; // Reset progress bar text
+            statusMessage.textContent = 'Procesando archivo, por favor espera...'; // Default status message (user-facing Spanish)
+            if(submitButton) submitButton.disabled = false; // Re-enable submit button
+        }
+
+        /**
+         * Polls the server for the status of an ongoing translation task.
+         * @param {string} statusUrl - The URL to fetch the task status from.
+         */
+        function pollStatus(statusUrl) {
+            if (pollingIntervalId) { // Clear any existing polling interval
+                clearInterval(pollingIntervalId);
+            }
+            pollingIntervalId = setInterval(() => {
+                fetch(statusUrl)
+                    .then(response => { // Check if the HTTP response is OK
+                        if (!response.ok) {
+                            // If not OK, attempt to parse error JSON from the server
+                            return response.json().then(errData => {
+                                throw new Error(errData.error || `Network or server error: ${response.status}`);
+                            }).catch(() => {
+                                // Fallback if response isn't JSON or doesn't have .error
+                                throw new Error(`Network or server error: ${response.status}`);
+                            });
+                        }
+                        return response.json(); // If OK, parse the JSON response
+                    })
+                    .then(data => { // Process the status data
+                        statusMessage.textContent = data.message || 'Procesando...'; // Update status message (user-facing Spanish)
+                        
+                        // Update progress bar based on reported progress and total
+                        if (data.total && data.total > 0) {
+                            const percentage = Math.min(100, Math.round((data.progress / data.total) * 100));
+                            progressBar.style.width = percentage + '%';
+                            progressBar.textContent = percentage + '%';
+                        } else if (data.status === 'processing' || data.status === 'queued') {
+                            // If total is not yet known, simulate some visual progress
+                            // to indicate activity, but cap it to avoid reaching 100% prematurely.
+                            let currentWidth = parseFloat(progressBar.style.width) || 0;
+                            if (currentWidth < 80) {
+                                currentWidth += 2; // Small increment for visual feedback
+                                progressBar.style.width = Math.min(currentWidth, 80) + '%';
+                                progressBar.textContent = Math.min(currentWidth, 80) + '%';
+                            }
+                        }
+
+                        // Handle task completion
+                        if (data.status === 'completed') {
+                            clearInterval(pollingIntervalId); // Stop polling
+                            statusMessage.textContent = '¡Traducción completa! Iniciando descarga...'; // Final status (user-facing Spanish)
+                            progressBar.style.width = '100%';
+                            progressBar.textContent = '100%';
+                            window.location.href = data.downloadUrl; // Trigger file download
+                            setTimeout(resetUI, 4000); // Reset UI after a delay to allow download initiation.
+                        } else if (data.status === 'error') { // Handle task error
+                            clearInterval(pollingIntervalId); // Stop polling
+                            messageAreaContainer.innerHTML = `<div class="message-area error"><p>Error en el servidor: ${data.message}</p></div>`; // Display error (user-facing Spanish)
+                            resetUI(); // Reset UI
+                        }
+                    })
+                    .catch(error => { // Handle errors during polling (e.g., network issues)
+                        console.error('Error polling status:', error);
+                        clearInterval(pollingIntervalId);
+                        messageAreaContainer.innerHTML = `<div class="message-area error"><p>Error de comunicación al obtener estado: ${error.message}. Intenta de nuevo.</p></div>`; // Display error (user-facing Spanish)
+                        resetUI();
+                    });
+            }, 2500); // Poll every 2.5 seconds
+        }
+
+        // --- Event Listener for Form Submission ---
+        if (uploadForm) {
+            uploadForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default HTML form submission
+
+                // Basic client-side validation: ensure a file is selected
+                if (csvFileInput.files.length === 0) {
+                    messageAreaContainer.innerHTML = `<div class="message-area error"><p>Por favor, selecciona un archivo CSV para traducir.</p></div>`; // User-facing Spanish
+                    return;
+                }
+
+                // Update UI to reflect processing state
+                uploadForm.classList.add('form-hidden'); // Hide the form
+                messageAreaContainer.innerHTML = ''; // Clear any previous messages
+                progressSection.style.display = 'block'; // Show progress section
+                statusMessage.textContent = 'Iniciando tarea de traducción...'; // Initial status (user-facing Spanish)
+                progressBar.style.width = '5%'; // Show a small initial progress
+                progressBar.textContent = '5%';
+                if(submitButton) submitButton.disabled = true; // Disable submit button to prevent multiple submissions
+
+                const formData = new FormData(uploadForm); // Gather form data
+
+                // --- AJAX Form Submission using Fetch API ---
+                // Submits form data to the Flask '/translate' endpoint asynchronously.
+                fetch("{{ url_for('translateCsvRoute') }}", { // Flask's url_for generates the correct endpoint URL
+                    method: 'POST',
+                    body: formData, // FormData is correctly handled by Fetch for 'multipart/form-data'
+                })
+                .then(response => { // Handle the HTTP response
+                    if (!response.ok) { // Check for HTTP errors (e.g., 400, 500)
+                        // Attempt to parse a JSON error message from the server response body
+                        return response.json().then(errData => {
+                            throw errData; // Throw the parsed error data (expected to have an 'error' field)
+                        }).catch(() => {
+                            // If parsing JSON fails or it's not JSON, throw a generic error
+                            throw new Error(`Server error: ${response.status}`);
+                        });
+                    }
+                    return response.json(); // If response is OK, parse the JSON body
+                })
+                .then(data => { // Handle the successfully parsed JSON data from the server
+                    if (data.error) { // If the server's JSON response contains an error message
+                        messageAreaContainer.innerHTML = `<div class="message-area error"><p>${data.error}</p></div>`;
+                        resetUI();
+                    } else if (data.taskId && data.statusUrl) { // If successful, server returns taskId and statusUrl
+                        statusMessage.textContent = 'Tarea iniciada. Procesando archivo...'; // Update status (user-facing Spanish)
+                        pollStatus(data.statusUrl); // Start polling for task status updates
+                    } else {
+                        // Handle unexpected JSON structure from the server
+                        messageAreaContainer.innerHTML = `<div class="message-area error"><p>Respuesta inesperada del servidor.</p></div>`; // User-facing Spanish
+                        resetUI();
+                    }
+                })
+                .catch(errorDataOrError => { // Catch network errors or errors thrown in previous .then() blocks
+                    console.error('Error initiating translation task:', errorDataOrError);
+                    let msg = 'Error al iniciar la tarea. Intenta de nuevo.'; // Default error message (user-facing Spanish)
+                    if (errorDataOrError && errorDataOrError.error) { // If it's an error object from server JSON
+                        msg = errorDataOrError.error;
+                    } else if (errorDataOrError instanceof Error) { // If it's a generic JavaScript Error object
+                        msg = errorDataOrError.message;
+                    }
+                    messageAreaContainer.innerHTML = `<div class="message-area error"><p>${msg}</p></div>`;
+                    resetUI();
+                });
+            });
+        }
+        
+        // --- UI Script for File Input (Drag & Drop, Display Filename) ---
+        // Enhances the file input with drag & drop functionality and filename display.
+        if (csvFileInput && uploadArea) {
+            // Clicking the styled area triggers the hidden file input
+            uploadArea.addEventListener('click', function() { csvFileInput.click(); });
+
+            // Update text in upload area when a file is selected
+            csvFileInput.addEventListener('change', function() {
+                if(uploadAreaTextEl) {
+                    uploadAreaTextEl.textContent = csvFileInput.files.length > 0 ? csvFileInput.files[0].name : originalUploadAreaText;
+                }
+            });
+
+            // Drag & Drop event handlers for visual feedback and functionality
+            uploadArea.addEventListener('dragover', (event) => {
+                event.preventDefault(); // Necessary to allow dropping
+                uploadArea.style.backgroundColor = '#d1e5f0'; // Visual cue for drag over
+            });
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.style.backgroundColor = '#ecf0f1'; // Revert visual cue
+            });
+            uploadArea.addEventListener('drop', (event) => {
+                event.preventDefault(); // Prevent default browser behavior (opening file)
+                uploadArea.style.backgroundColor = '#ecf0f1'; // Revert visual cue
+                if (event.dataTransfer && event.dataTransfer.files.length > 0) {
+                    csvFileInput.files = event.dataTransfer.files; // Assign dropped files to the input
+                    // Manually dispatch a 'change' event so the listener above picks up the filename
+                    const changeEvent = new Event('change');
+                    csvFileInput.dispatchEvent(changeEvent);
+                }
+            });
+        }
+
+        // --- Initial UI State on Page Load ---
+        // Ensures the UI is in a consistent state if the page is loaded
+        // with server-rendered messages (e.g., from Flask after a non-AJAX submission or redirect).
+        window.addEventListener('load', function() {
+            const errorDiv = messageAreaContainer.querySelector('.message-area.error');
+            const avisoDiv = messageAreaContainer.querySelector('.message-area.aviso'); // 'aviso' is Spanish for notice
+            
+            // If Flask renders an error or notice directly into the page (e.g., on a GET request),
+            // ensure the form is visible and not the progress bar.
+            if ((errorDiv && errorDiv.textContent.trim() !== "") || (avisoDiv && avisoDiv.textContent.trim() !== "")) {
+                resetUI();
+            }
+        });
+    </script>
+</body>
+</html>

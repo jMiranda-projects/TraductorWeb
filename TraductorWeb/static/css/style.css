@@ -1,0 +1,261 @@
+/* General Page Styles */
+/* Establishes base styling for the entire application, ensuring a consistent look and feel. */
+body {
+    font-family: 'Arial', sans-serif; /* Sets a clean, widely available font. */
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6; /* Light grey background for a soft visual. */
+    color: #333; /* Default text color for good readability. */
+    display: flex;
+    flex-direction: column; /* Arranges child elements vertically. */
+    min-height: 100vh; /* Ensures the body takes at least the full viewport height. */
+    line-height: 1.6; /* Improves text readability. */
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers content horizontally within the container. */
+    width: 100%;
+    padding: 20px; /* Provides spacing around the page content. */
+    box-sizing: border-box; /* Includes padding and border in the element's total width and height. */
+    flex-grow: 1; /* Allows this container to grow and fill available space (part of sticky footer). */
+}
+
+/* Header and Logo Styling */
+/* Styles for the top section of the page, typically containing branding. */
+.header-container {
+    width: 100%;
+    max-width: 900px; /* Constrains the width of the header content for better layout on wider screens. */
+    margin-bottom: 30px; /* Space below the header. */
+    text-align: left; /* Aligns logo to the left. */
+}
+
+.header-container img.logo {
+    max-height: 50px; /* Controls the maximum height of the logo. Adjust as needed. */
+    width: auto; /* Maintains aspect ratio. */
+}
+
+/* Main Content Container (Form Wrapper) */
+/* Styles for the primary content area, wrapping the main form. */
+.main-container {
+    background-color: #ffffff; /* White background for the main content card. */
+    padding: 30px 40px; /* Generous padding inside the card. */
+    border-radius: 12px; /* Rounded corners for a modern look. */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth. */
+    width: 100%;
+    max-width: 700px; /* Constrains the width of the form area. */
+    text-align: center; /* Centers text elements like H1, H2 by default. */
+}
+
+/* Heading Styles */
+h1 {
+    color: #2c3e50; /* Dark blue, providing strong visual hierarchy. */
+    margin-bottom: 15px;
+    font-size: 2em; /* Large size for the main title. */
+}
+
+h2 {
+    color: #555; /* Slightly lighter color for subtitles. */
+    margin-bottom: 30px;
+    font-size: 1.1em;
+    font-weight: normal; /* Normal weight for subtitles to differentiate from H1. */
+}
+
+/* Form Specific Styles */
+/* General styling for the form and its sections. */
+form { /* Applies to the <form id="uploadForm"> */
+    display: flex;
+    flex-direction: column; /* Stacks form elements vertically. */
+    gap: 20px; /* Consistent spacing between form elements. */
+}
+
+.form-section {
+    text-align: left; /* Aligns labels and inputs to the left within each section. */
+}
+
+label { /* Style for text input labels */
+    display: block; /* Makes the label take up the full width, pushing the input to the next line. */
+    margin-bottom: 8px; /* Space below the label. */
+    font-weight: bold;
+    color: #34495e; /* Greyish blue, softer than black. */
+    font-size: 0.95em;
+}
+
+input[type="text"] { /* Style for text input fields */
+    width: calc(100% - 22px); /* Full width minus padding and border to fit container. */
+    padding: 12px 10px;
+    border: 1px solid #bdc3c7; /* Light grey border. */
+    border-radius: 6px; /* Rounded corners for input fields. */
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+/* File Upload Area (Inspired by iLovePDF) */
+/* Custom styling for the file input to make it more user-friendly and visually appealing. */
+.upload-area { /* This is the <label> element that wraps the actual file input. */
+    border: 2px dashed #3498db; /* Blue dashed border to indicate a drop zone. */
+    border-radius: 8px;
+    padding: 30px;
+    background-color: #ecf0f1; /* Very light grey background. */
+    cursor: pointer; /* Indicates the area is clickable. */
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect. */
+    margin-bottom: 20px; /* Space before other form fields. */
+    display: flex; /* Enables flexbox for centering content. */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.upload-area:hover {
+    background-color: #e0e6e8; /* Slightly darker background on hover. */
+}
+
+.upload-area .upload-button-styled { /* The <span> styled to look like a button within the upload area. */
+    background-color: #e74c3c; /* Red color, similar to iLovePDF's branding. */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1em;
+    font-weight: bold;
+    display: inline-block; /* Allows padding and other block-level properties. */
+    transition: background-color 0.3s ease;
+}
+
+.upload-area .upload-button-styled:hover {
+    background-color: #c0392b; /* Darker red on hover. */
+}
+
+.upload-area p { /* The "or drag and drop..." text. */
+    margin-top: 15px;
+    color: #555;
+    font-size: 0.9em;
+}
+
+/* Hide the actual file input, but keep its functionality accessible via the label. */
+input[type="file"]#csvFileUpload { /* Updated ID to match HTML */
+    display: none;
+}
+
+/* Main Submit Button Styling */
+button[type="submit"] {
+    background-color: #27ae60; /* Green color for the primary action button. */
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Button takes full width of its container. */
+    margin-top: 10px; /* Extra space above the button. */
+}
+
+button[type="submit"]:hover {
+    background-color: #229954; /* Darker green on hover. */
+}
+
+/* Message Area Styling (for errors and notices) */
+/* Provides visual feedback to the user for different types of messages. */
+.message-area {
+    margin-top: 25px; /* Space above the message area. */
+    padding: 15px;
+    border-radius: 6px;
+    font-size: 0.95em;
+    text-align: left; /* Aligns message text to the left for readability. */
+}
+.message-area.error { /* Styling for error messages. */
+    background-color: #f8d7da; /* Light red background. */
+    color: #721c24; /* Dark red text for contrast. */
+    border: 1px solid #f5c6cb;
+}
+.message-area.aviso { /* Styling for notice/warning messages. */
+    background-color: #fff3cd; /* Light yellow background. */
+    color: #856404; /* Dark yellow/brown text. */
+    border: 1px solid #ffeeba;
+}
+
+/* Helper Text Styling */
+/* Small text typically placed below input fields to provide guidance. */
+.helptext {
+    font-size: 0.85em;
+    color: #7f8c8d; /* Grey color for subtlety. */
+    display: block;
+    margin-top: 5px; /* Space above the help text. */
+}
+
+/* Footer Styling (Optional) */
+/* Styles for the page footer, typically containing copyright or links. */
+.footer {
+    text-align: center;
+    padding: 20px;
+    color: #7f8c8d; /* Grey text. */
+    font-size: 0.9em;
+    width: 100%;
+    max-width: 900px; /* Constrains footer width. */
+}
+.footer a {
+    color: #3498db; /* Blue links. */
+    text-decoration: none;
+}
+.footer a:hover {
+    text-decoration: underline; /* Underline on hover for better affordance. */
+}
+
+/* Basic Responsiveness */
+/* Adjusts layout for smaller screens to improve user experience. */
+@media (max-width: 768px) {
+    .main-container {
+        padding: 20px; /* Reduces padding on smaller screens. */
+    }
+    h1 {
+        font-size: 1.8em; /* Slightly smaller H1 for mobile. */
+    }
+    .upload-area {
+        padding: 20px; /* Reduces padding in upload area. */
+    }
+}
+
+/* Progress Bar and Status Message Styling */
+/* Styles for visual feedback during file processing. */
+.progress-section {
+    display: none; /* Hidden by default, shown via JavaScript during processing. */
+    width: 100%;
+    margin-top: 30px; /* Space above the progress section. */
+    text-align: center;
+}
+
+.progress-bar-container {
+    background-color: #e0e0e0; /* Light grey background for the progress bar track. */
+    border-radius: 25px; /* Rounded track. */
+    padding: 3px; /* Padding to contain the inner bar. */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,.2); /* Inner shadow for depth. */
+    width: 80%; /* Progress bar container width relative to its parent. */
+    margin: 15px auto; /* Centers the progress bar container. */
+}
+
+.progress-bar {
+    height: 20px;
+    background-color: #27ae60; /* Green fill, same as submit button, for consistency. */
+    width: 0%; /* Starts at 0% width, updated by JavaScript. */
+    border-radius: 25px; /* Rounded fill bar. */
+    text-align: center; /* Centers the percentage text. */
+    line-height: 20px; /* Vertically aligns percentage text. */
+    color: white; /* White text for readability on green background. */
+    font-size: 0.8em;
+    transition: width 0.4s ease; /* Smooth animation for width changes. */
+}
+
+#statusMessage { /* The <p> element displaying textual status updates. */
+    font-size: 1.1em;
+    color: #333;
+    margin-bottom: 10px; /* Space below the status message. */
+}
+
+/* Utility class to hide the form when progress is shown. */
+/* Uses !important to ensure it overrides other display properties if necessary. */
+.form-hidden {
+    display: none !important;
+}
