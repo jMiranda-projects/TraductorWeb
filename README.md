@@ -1,5 +1,5 @@
 # TraductorWeb
-"Logistics CSV translation demo (English to Spanish) with a custom-trained AI model (Python, Flask, Transformers).
+Logistics CSV translation demo (English to Spanish) with a custom-trained AI model (Python, Flask, Transformers).
 This project is a web application designed to translate CSV files, with a special focus on **English-to-Spanish** translation for **logistics terminology**. It utilizes a custom fine-tuned AI model based on the MarianMT architecture from Hugging Face Transformers to provide accurate and context-aware translations for the logistics industry.
 
 The application allows users to upload a CSV file, specify the column containing English text to be translated, define the CSV delimiter, and then download the processed file with an added column containing the Spanish translations. The translation process is handled asynchronously in the background, with real-time progress updates displayed to the user.
